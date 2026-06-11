@@ -1,14 +1,31 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Super Alpha Market | Ingeniería UX/UI & Matriz de Servicios Digitales</title>
-  <meta name="description" content="Ofrecemos soluciones digitales premium: Landing Pages, Sitios Web Escalables, E-Commerce, UX/UI Inmersivo y Gestión de Redes Sociales para PYMEs. Cotiza tu proyecto hoy.">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" type="image/png" href="assets/logo.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Super Alpha Market | Ingeniería UX/UI & Servicios Digitales</title>
+<meta name="description" content="Soluciones digitales premium: Landing Pages, Sitios Web Escalables, E-Commerce, UX/UI inmersivo y gestión de redes sociales para PYMEs. Obtén 50% de descuento con código PYME.">
+<meta name="keywords" content="super alpha market, landing pages, sitios web, ecommerce, UX UI, marketing digital, PYMEs, descuento">
+<meta property="og:title" content="Super Alpha Market – 50% de descuento para PYMEs">
+<meta property="og:description" content="Aprovecha 50% de descuento por 2 meses con el código PYME. Servicios digitales premium.">
+<meta property="og:image" content="assets/logo.png">
+<meta property="og:url" content="https://samberserker.github.io/sam-conecta/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Super Alpha Market – 50% de descuento para PYMEs">
+<meta name="twitter:description" content="Aprovecha 50% de descuento por 2 meses con el código PYME. Servicios digitales premium.">
+<link rel="stylesheet" href="css/style.css">
+<link rel="icon" type="image/png" href="assets/logo.png">
 </head>
-<body>
+  <!-- Banner de descuento -->
+  <div id="discount-banner" class="discount-banner">
+    <p>¡Oferta 50% de descuento por 2 meses para PYMEs! Usa el código <strong>PYME</strong>. Oferta válida por <span id="discount-timer"></span>.</p>
+    <div class="discount-code-section" style="margin-top:8px;display:flex;gap:8px;align-items:center;">
+      <input type="text" id="discount-code" placeholder="Ingresa el código" style="padding:6px;border-radius:4px;border:1px solid #ccc;flex:1;" />
+      <button id="apply-discount" style="background:#ff5a5f;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">Aplicar</button>
+      <span id="discount-error" style="color:#ff4d4f;display:none;">Código inválido</span>
+    </div>
+  </div>
+  </div>
 
   <!-- Elementos de fondo decorativos -->
   <div class="gradient-bg-orbs">
@@ -252,5 +269,55 @@
 
   <script src="js/services.js"></script>
   <script src="js/app.js"></script>
-</body>
+  <script>
+  // Countdown timer for 24‑hour discount banner
+  function startDiscountTimer() {
+    const endTime = Date.now() + 24 * 60 * 60 * 1000; // 24h
+    const timerEl = document.getElementById('discount-timer');
+    const bannerEl = document.getElementById('discount-banner');
+    const interval = setInterval(() => {
+      const now = Date.now();
+      const diff = endTime - now;
+      if (diff <= 0) {
+        clearInterval(interval);
+        if (bannerEl) bannerEl.style.display = 'none';
+      } else {
+        const hours = Math.floor(diff / (1000 * 60 * 60));
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+        if (timerEl) timerEl.textContent = `${hours}h ${minutes}m ${seconds}s`;
+      }
+    }, 1000);
+  }
+
+  // Initialize discount code handling
+  function initDiscountHandler() {
+    const applyBtn = document.getElementById('apply-discount');
+    const errorEl = document.getElementById('discount-error');
+    if (!applyBtn) return;
+    applyBtn.addEventListener('click', () => {
+      const codeInput = document.getElementById('discount-code');
+      const code = codeInput ? codeInput.value.trim().toUpperCase() : '';
+      if (code === 'PYME') {
+        if (errorEl) errorEl.style.display = 'none';
+        // Mensaje predefinido para WhatsApp
+        const msg = encodeURIComponent('Hola, uso el código PYME para obtener el 50% de descuento por 2 meses.');
+        window.open(`https://wa.me/56930973700?text=${msg}`, '_blank');
+      } else {
+        if (errorEl) errorEl.style.display = 'inline';
+      }
+    });
+  }
+
+  // Run on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      startDiscountTimer();
+      initDiscountHandler();
+    });
+  } else {
+    startDiscountTimer();
+    initDiscountHandler();
+  }
+</script>
 </html>
