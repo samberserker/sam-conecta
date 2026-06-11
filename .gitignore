@@ -1,0 +1,7 @@
+# Ignorar archivos del sistema
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Ignorar carpeta de Node si se agrega después
+node_modules/
