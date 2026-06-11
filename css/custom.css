@@ -1,0 +1,121 @@
+/* custom.css - Estilos premium y animaciones */
+
+/* Variables de color y tipografía (heredadas) */
+:root {
+  --bg-primary: #0a0b10;
+  --bg-secondary: #12131c;
+  --bg-glass: rgba(18, 19, 28, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --accent-primary: #3b82f6; /* Azul cobalto */
+  --accent-secondary: #8b5cf6; /* Violeta eléctrico */
+  --accent-success: #10b981; /* Esmeralda */
+  --accent-danger: #ef4444; /* Coral */
+  --text-primary: #f3f4f6;
+  --text-secondary: #9ca3af;
+  --text-muted: #6b7280;
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius-lg: 16px;
+  --border-radius-md: 10px;
+}
+
+/* Banner de descuento con efecto glass y animación */
+.discount-banner {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--border-radius-md);
+  padding: 16px 24px;
+  margin: 20px auto;
+  max-width: 960px;
+  text-align: center;
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  animation: slideDown 0.8s ease-out forwards;
+}
+
+@keyframes slideDown {
+  0% { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Header logo hover tilt */
+.logo-container img {
+  transition: var(--transition-smooth);
+}
+.logo-container:hover img {
+  transform: rotate(5deg) scale(1.05);
+}
+
+/* Hero title con gradiente animado */
+.hero-title {
+  background: linear-gradient(270deg, var(--accent-primary), var(--accent-secondary), var(--accent-primary));
+  background-size: 600% 600%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradientShift 8s ease infinite;
+}
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Botones principales con pulso sutil */
+.btn-submit, .btn-whatsapp, .btn-select-plan {
+  position: relative;
+  overflow: hidden;
+}
+.btn-submit::after, .btn-whatsapp::after, .btn-select-plan::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.btn-submit:hover::after, .btn-whatsapp:hover::after, .btn-select-plan:hover::after {
+  opacity: 1;
+}
+
+/* Pulse animation on hover for select plan button */
+.btn-select-plan:hover {
+  animation: pulse 1.2s infinite;
+}
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(139,92,246,0.4); }
+  70% { box-shadow: 0 0 0 8px rgba(139,92,246,0); }
+  100% { box-shadow: 0 0 0 0 rgba(139,92,246,0); }
+}
+
+/* Mejorar barra de scroll (ya en style.css) */
+
+/* Animación de aparición suave para tarjetas */
+.service-level-card {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+@keyframes fadeInUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajustes de responsividad del banner */
+@media (max-width: 768px) {
+  .discount-banner {
+    font-size: 0.85rem;
+    padding: 12px 16px;
+  }
+}
+/* Gradient Background Animation */
+body {
+  background: linear-gradient(135deg, #0a0b10, #12131c, #0a0b10);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
